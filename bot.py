@@ -368,6 +368,7 @@ async def check_events():
 # -----------------------------
 @bot.tree.command(name="eventos", description="Crear un evento paso a paso", guild=GUILD)
 async def eventos(interaction: discord.Interaction):
+    await interaction.response.defer(ephemeral=True)  # Dice a Discord "espera"
     await interaction.response.send_message("Te enviaré un DM para crear el evento paso a paso.", ephemeral=True)
     user = interaction.user
     dm = await user.create_dm()
@@ -651,6 +652,8 @@ async def eventos(interaction: discord.Interaction):
 # -----------------------------
 @bot.tree.command(name="proximos_eventos_visual", description="Muestra los próximos eventos tipo calendario con emojis", guild=GUILD)
 async def proximos_eventos_visual(interaction: discord.Interaction):
+    await interaction.response.defer(ephemeral=True)
+    
     global events
     now = datetime.now()
 
