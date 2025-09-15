@@ -369,7 +369,7 @@ async def check_events():
 @bot.tree.command(name="eventos", description="Crear un evento paso a paso", guild=GUILD)
 async def eventos(interaction: discord.Interaction):
     await interaction.response.defer(ephemeral=True)  # Dice a Discord "espera"
-    await interaction.response.send_message("Te enviaré un DM para crear el evento paso a paso.", ephemeral=True)
+    await interaction.followup.send("Te enviaré un DM para crear el evento paso a paso.", ephemeral=True)
     user = interaction.user
     dm = await user.create_dm()
 
@@ -661,7 +661,7 @@ async def proximos_eventos_visual(interaction: discord.Interaction):
     upcoming = [e for e in events if datetime.strptime(e["start"], "%Y-%m-%d %H:%M") >= now]
 
     if not upcoming:
-        await interaction.response.send_message("No hay eventos próximos.", ephemeral=True)
+        await interaction.followup.send(embed=embed, ephemeral=True)
         return
 
     # Ordenar por fecha
